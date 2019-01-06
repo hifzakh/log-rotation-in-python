@@ -32,7 +32,7 @@ To run the above script after specific time intervals regularly, we need to add 
 0,10,20,30,40,50 * * * * /usr/local/bin/movemedia.sh >> /var/log/movelogs.log 2>&1
 ```
 
-The above command runs the `/usr/local/bin/movelogs.sh` script after every `5` minutes for always. The output for the script is written in `/var/log/movelogs.log` and `2>&1` is used to redirect both `stdout` and `stderr` to the same place i.e. `/var/log/movelogs.log`.
+The above command runs the `/usr/local/bin/movelogs.sh` script after every `5` minutes. The output for the script is written in `/var/log/movelogs.log` and `2>&1` is used to redirect both `stdout` and `stderr` to the same place i.e. `/var/log/movelogs.log`.
 
 To add the above command to `crontab` file, open your `crontab` file in editing mode by typing in `crontab -e` in terminal, add the above command at the end of that file and save it. After adding the above command, type `sudo service cron reload` to reload configuration files for periodic command scheduler cron.
 
@@ -45,4 +45,6 @@ size 30K
 missingok
 ```
 
-The above configuration of the `/etc/logrotate.d/movelogs` specifies the maximum number of rotated files that will be kept, the frequency of rotation, the maximum size of the log file and that if there is no log file then it ok.
+The above configuration of the `/etc/logrotate.d/movelogs` file specifies the maximum number of rotated files that will be kept, the frequency of rotation, the maximum size of the log file and that if there is no log file then it ok.
+
+## Test your Implementation
