@@ -14,7 +14,7 @@ To implement size based log rotation, I used `RotatingFileHandler` class impleme
 The code in `size_based_log_rotation.py` sets the format and level of logging records and rotates the log files whenever their size exceeds `250` bytes while keeping at most `5` backup files. Whenever a new log file is created, it is named exactly as the original log file concatenated with the local date and time. The file is then compressed using `zlib` module available in python. The code also has a simple loop that writes to the log file. 
 
 ## Cron job to move compressed files
-To move compressed files from the `home` directory to `tmp` directory, add the following code to `/usr/local/bin/movelogs.sh/`
+To move compressed files from the `home` directory to `tmp` directory, add the following code to `/usr/local/bin/movelogs.sh/` and modify the permissions of the file to make it executable.
 
 ```
 #!/bin/bash
@@ -32,6 +32,17 @@ To run the above script after specific time intervals regularly, we need to add 
 0,10,20,30,40,50 * * * * /usr/local/bin/movemedia.sh >> /var/log/movelogs.log 2>&1
 ```
 
-The above command runs the `/usr/local/bin/movelogs.sh` script after every `5` minutes for always unless modified. The output for the script is written in `/var/log/movelogs.log`. `2>&1` is used to redirect both `stdout` and `stderr` to `/var/log/movelogs.log`.
+The above command runs the `/usr/local/bin/movelogs.sh` script after every `5` minutes for always. The output for the script is written in `/var/log/movelogs.log` and `2>&1` is used to redirect both `stdout` and `stderr` to the same place i.e. `/var/log/movelogs.log`.
 
-To add the above command to `crontab` file, open your `crontab` file in editing mode by typing in `crontab -e` in terminal, add the above command at the end of that file and save it.  
+To add the above command to `crontab` file, open your `crontab` file in editing mode by typing in `crontab -e` in terminal, add the above command at the end of that file and save it. After adding the above command, type `sudo service cron reload` to reload configuration files for periodic command scheduler cron.
+
+Since we are using Linux therefore we want to rotate the `/var/log/movelogs.log` file each day by creating a file: `/etc/logrotate.d/movelogs` containing:
+
+```
+rotate 5
+daily
+size 30K
+missingok
+```
+
+The above configuration of the `/etc/logrotate.d/movelogs` specifies the maximum number of rotated files that will be kept, the frequency of rotation, the maximum size of the log file and that if there is no log file then it ok.
