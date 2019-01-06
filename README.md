@@ -48,3 +48,11 @@ missingok
 The above configuration of the `/etc/logrotate.d/movelogs` file specifies the maximum number of rotated files that will be kept, the frequency of rotation, the maximum size of the log file and that if there is no log file then it ok.
 
 ## Test your Implementation
+
+To test your implementation, run the above files separately. While running the above files, check if new log file is generated after every `1 minute` or when the file size is equal to `250 bytes`. At most `5` backup log files should be there. To see the content of the compressed log files, use the following command: 
+
+```
+zlib-flate -uncompress < filename.gz
+```
+
+Match the content of the original log file and check the timestamps to see if the original log file contains the new messages and the compressed files contain the old ones. After every `10 minutes`, check if the backup log files with `.gz` extension have been moved to `/tmp/logs`.
