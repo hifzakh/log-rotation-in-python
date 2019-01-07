@@ -64,4 +64,4 @@ Match the content of the original log file and check the timestamps to see if th
 
 ## Future Work
 
-We can see cases in future such as when multiple sources are writing to the log file or when our system requires both time based and size based log rotation in python. 
+We can see cases in future such as when multiple sources are writing to the log file or when our system requires both time based and size based log rotation in python. Also, we can test our code with larger processes to do stress testing.
