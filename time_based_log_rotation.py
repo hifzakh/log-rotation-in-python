@@ -51,9 +51,9 @@ def create_time_based_rotating_log(log_path):
     handler.namer = namer
     logger.addHandler(handler)
  
-    for i in range(100):
-        logger.debug("This is a test!")
-        time.sleep(1)
+    for i in range(10000):
+        logger.debug('%d' % i)
+        time.sleep(5)
 
 #----------------------------------------------------------------------
 
