@@ -50,12 +50,16 @@ The above configuration of the `/etc/logrotate.d/movelogs` file specifies the ma
 
 ### Case 1
 
-Test your implementation for the simplest case where your process does not generate any logs i.e. the log file is empty, no compressed files are formed and the cron job has no files to move. To test this case, run `size_based_test_1.py` and `time_based_test_1.py` files separately. While running the above files, check if new log file is generated after every `1 minute` or when the file size is equal to `250 bytes`. At most `5` backup log files should be there in both the cases. To see the content of the compressed log files, use the following command: 
+Test your implementation for the simplest case where your process does not generate any logs i.e. the log file is empty, no compressed files are formed and the cron job has no files to move. To test this case, run `size_based_test_1.py` and `time_based_test_1.py` files separately. While running the above files, see if the original log file remains empty and no compressed files are generated.
+
+### Case 2
+
+Test your implementation for the case where your process does generate logs such that at most `5` backup files are generated (you can change the number as needed). While running the `size_based_test_2.py` and `time_based_test_2.py` files, check if new log file is generated after every `1 minute` or when the file size is equal to `250 bytes` respectively. At most `5` backup log files should be there in both the cases. To see the content of the compressed log files, use the following command: 
 
 ```
 zlib-flate -uncompress < filename.gz
 ```
 
-Match the content of the original log file and check the timestamps to see if the original log file contains the new messages and the compressed files contain the old ones. After every `10 minutes`, check if the backup log files with `.gz` extension have been moved to `/tmp/logs`.
+Match the content of the original log file and check the timestamps to see if the original log file contains the new messages and the compressed files contain the old ones. After every `10 minutes`, check if the backup log files with `.gz` extension have been moved to `/tmp/logs`. You can also change the `crontab` command such that the files with `.gz` extension are moved every minute by adding `* * * * * /usr/local/bin/movemedia.sh >> /var/log/movelogs.log 2>&1` to the `crontab` file.
 
 
