@@ -18,7 +18,6 @@ To move compressed files from the `home` directory to `tmp` directory, add the f
 
 ```
 #!/bin/bash
-PATH=/home/username/bin:/home/username/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/bin/movelogs.sh
 sDirectory="/home/username/logs"
 sLogs="/tmp/logs"
 find $sDirectory -type f -maxdepth 1 -name "*.gz" -exec mv {} $sLogs \;
@@ -49,10 +48,14 @@ The above configuration of the `/etc/logrotate.d/movelogs` file specifies the ma
 
 ## Test your Implementation
 
-To test your implementation, run the above files separately. While running the above files, check if new log file is generated after every `1 minute` or when the file size is equal to `250 bytes`. At most `5` backup log files should be there. To see the content of the compressed log files, use the following command: 
+### Case 1
+
+Test your implementation for the simplest case where your process does not generate any logs i.e. the log file is empty, no compressed files are formed and the cron job has no files to move. To test this case, run `size_based_test_1.py` and `time_based_test_1.py` files separately. While running the above files, check if new log file is generated after every `1 minute` or when the file size is equal to `250 bytes`. At most `5` backup log files should be there in both the cases. To see the content of the compressed log files, use the following command: 
 
 ```
 zlib-flate -uncompress < filename.gz
 ```
 
 Match the content of the original log file and check the timestamps to see if the original log file contains the new messages and the compressed files contain the old ones. After every `10 minutes`, check if the backup log files with `.gz` extension have been moved to `/tmp/logs`.
+
+
