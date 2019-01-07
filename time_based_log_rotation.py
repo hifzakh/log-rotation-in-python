@@ -43,8 +43,8 @@ def create_time_based_rotating_log(log_path):
  
     # Creates at most 5 backup files after every 30 seconds
     handler = logging.handlers.TimedRotatingFileHandler(filename=log_path+'tmp.log',
-                                       when="s",
-                                       interval=5,
+                                       when="m",
+                                       interval=1,
                                        backupCount=5)
     handler.setFormatter(formatter)
     handler.rotator = rotator
