@@ -11,7 +11,7 @@ The code in `time_based_log_rotation.py` sets the format and level of logging re
 ## Size based Log Rotation
 To implement size based log rotation, I used `RotatingFileHandler` class implemented in Python which allows us to specify the log file name, maximum number of bytes in the log file and the number of maximum backup log files. 
 
-The code in `size_based_log_rotation.py` sets the format and level of logging records and rotates the log files whenever their size equals to or exceeds `250` bytes while keeping at most `5` backup files. Whenever a new log file is created, it is named exactly as the original log file concatenated with the number of backup file. The file is then compressed using `zlib` module available in python. The code also has a simple loop that writes to the log file. 
+The code in `size_based_log_rotation.py` sets the format and level of logging records and rotates the log files whenever their size equals to or exceeds `250` bytes while keeping at most `5` backup files. Whenever a new log file is created, it is named exactly as the original log file concatenated with the number of backup file. The older the file, the greater the number. The file is then compressed using `zlib` module available in python. The code also has a simple loop that writes to the log file. 
 
 ## Cron job to move compressed files
 To move compressed files from the `home` directory to `tmp` directory, add the following code to `/usr/local/bin/movelogs.sh/` and modify the permissions of the file to make it executable.
