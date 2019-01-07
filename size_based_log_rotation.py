@@ -6,10 +6,11 @@ import logging.handlers
 from logging import Formatter
 from logging.handlers import TimedRotatingFileHandler
 
-
+# name the compressed file
 def namer(name):
     return name + ".gz"
 
+# read the data from source, compress it, write it to dest and delete source
 def rotator(source, dest):
     with open(source, "rb") as sf:
         data = sf.read()
@@ -40,7 +41,7 @@ def create_size_based_rotating_log(log_path):
     # Instantiates a logger object
     logger = logging.getLogger("Rotating Log")
  
-    # Creates at most 5 backup files after every 30 seconds
+    # Creates at most 5 backup whenever the filesize equals to or exceeds 250 bytes
     handler = logging.handlers.RotatingFileHandler(filename=log_path+'tmp.log',
                                        maxBytes=250,
                                        backupCount=5)
