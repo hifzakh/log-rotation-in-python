@@ -54,7 +54,7 @@ Test your implementation for the simplest case where your process does not gener
 
 ### Case 2
 
-Test your implementation for the case where your process does generate logs such that at most `5` backup files are generated (you can change the number as needed). While running the `size_based_test_2.py` and `time_based_test_2.py` files, check if new log file is generated after every `1 minute` or when the file size is equal to `250 bytes` respectively. At most `5` backup log files should be there in both the cases. To see the content of the compressed log files, use the following command: 
+Test your implementation for the case where your process does generate logs such that at most `5` backup files are generated (you can change the number as needed). While running the `size_based_test_2.py` and `time_based_test_2.py` files, check if new log file is generated after every `1 minute` or when the file size is near `250 bytes` respectively. At most `5` backup log files should be there in both the cases. To see the content of the compressed log files, use the following command: 
 
 ```
 zlib-flate -uncompress < filename.gz
