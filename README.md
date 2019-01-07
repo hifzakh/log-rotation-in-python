@@ -62,4 +62,6 @@ zlib-flate -uncompress < filename.gz
 
 Match the content of the original log file and check the timestamps to see if the original log file contains the new messages and the compressed files contain the old ones. After every `10 minutes`, check if the backup log files with `.gz` extension have been moved to `/tmp/logs`. You can also change the `crontab` command such that the files with `.gz` extension are moved every minute by adding `* * * * * /usr/local/bin/movemedia.sh >> /var/log/movelogs.log 2>&1` to the `crontab` file.
 
+## Future Work
 
+We can see cases in future such as when multiple sources are writing to the log file or when our system requires both time based and size based log rotation in python. 
