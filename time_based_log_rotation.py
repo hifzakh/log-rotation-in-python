@@ -6,10 +6,11 @@ import logging.handlers
 from logging import Formatter
 from logging.handlers import TimedRotatingFileHandler
 
-
+# name the compressed file
 def namer(name):
     return name + ".gz"
 
+# read the data from source, compress it, write it to dest and delete source
 def rotator(source, dest):
     with open(source, "rb") as sf:
         data = sf.read()
@@ -18,7 +19,7 @@ def rotator(source, dest):
             df.write(compressed)
     os.remove(source)
 
-def create_timed_rotating_log(log_path):
+def create_time_based_rotating_log(log_path):
     """"""
 
     # Checks if the path exists otherwise tries to create it
@@ -58,6 +59,6 @@ def create_timed_rotating_log(log_path):
 
 if __name__ == "__main__":
     log_path = "logs/"
-    create_timed_rotating_log(log_path)
+    create_time_based_rotating_log(log_path)
 
 
