@@ -4,7 +4,6 @@ import zlib
 import logging
 import logging.handlers
 from logging import Formatter
-from logging.handlers import TimedRotatingFileHandler
 
 # name the compressed file
 def namer(name):
@@ -59,4 +58,3 @@ def create_size_based_rotating_log(log_path):
 if __name__ == "__main__":
     log_path = "logs/"
     create_size_based_rotating_log(log_path)
-
